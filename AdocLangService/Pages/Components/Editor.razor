@@ -1,0 +1,40 @@
+﻿@using AdocLangService.Pages.Components.EditorParts
+@page "/editor"
+
+<MudGrid Spacing="1">
+    <MudItem xs="6">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full">
+            <div class="grid-item">
+                <AdocEditor ContentChanged="HandleContentChanged"/>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="6">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full">
+            <div class="grid-item">
+                <AdocPreview @ref="_preview"/>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="8">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full">
+            <div class="grid-item">
+                <EditorFiles/>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="4">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full">
+            <div class="grid-item">
+                <EditorActions/>
+            </div>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+
+    private AdocPreview _preview = default!;
+
+    
+}
