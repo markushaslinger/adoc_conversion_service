@@ -20,6 +20,15 @@ public sealed class TempDir : IDisposable
     {
         Directory.CreateDirectory(DirPath);
     }
+
+    public void Clear()
+    {
+        if (Directory.Exists(DirPath))
+        {
+            Directory.Delete(DirPath, true);
+        }
+        Prepare();
+    }
     
     public void Dispose()
     {
