@@ -21,4 +21,8 @@
       <PackageReference Include="MudBlazor" Version="6.1.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\fonts" />
+    </ItemGroup>
+
 </Project>
