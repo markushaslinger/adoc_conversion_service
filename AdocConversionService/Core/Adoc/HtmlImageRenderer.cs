@@ -124,21 +124,7 @@ public sealed class HtmlImageRenderer
     private static string PrepareRenderSizeInjectionStyle(string elementToExtend)
     {
         var (width, height) = Const.RenderImageResolution;
-        var style = $$"""
-                <style>
-                    body {
-                        width: {{width}}px;
-                        height: {{height}}px;
-                    }
-                </style>
-                {{elementToExtend}}
-                """;
-        
-        style = style
-            .Replace(" ",string.Empty)
-            .Replace("\\r",string.Empty)
-            .Replace("\\n",string.Empty);
-        
-        return style;
+        var style = $$"""<style>body{width:{{width}}px;height:{{height}}px;}</style>{{elementToExtend}}""";
+        return style.Trim();
     }
 }
