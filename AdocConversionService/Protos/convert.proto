@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option csharp_namespace = "AdocConversionService";
+
+package convert;
+
+service AdocConvert {
+  rpc Convert (ConvertRequest) returns (ConvertResponse);
+}
+
+message ConvertRequest {
+  enum RequestConversionType {
+      HTML = 0;
+      PDF = 1;
+      PRESENTATION = 2;
+  }
+  string api_token = 1;
+  RequestConversionType type = 2;
+  string adoc_content = 3;
+  repeated Image images = 4;
+}
+
+message ConvertResponse {
+  enum ResultType {
+    HTML = 0;
+    PDF = 1;
+    IMAGE = 2;
+  }
+  bool success = 1;
+  uint32 duration_milliseconds = 2;
+  ResultType type = 3;
+  optional bytes document = 4;
+  optional Image image = 5;
+  optional string error_message = 6;
+}
+
+message Image {
+  string name = 1;
+  optional uint32 width = 2;
+  optional uint32 height = 3;
+  bytes data = 4;
+}
