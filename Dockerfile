@@ -30,14 +30,6 @@ RUN gem install asciidoctor-revealjs
 
 # install imagemagick
 RUN apt-get install -y imagemagick
-#WORKDIR /imsetup
-#RUN wget https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz
-#RUN tar --strip-components=1 -xvzf ImageMagick.tar.gz
-#RUN ./configure
-#RUN make
-#RUN make install 
-#RUN ldconfig /usr/local/lib
-#ENV PATH="${PATH}:/usr/local/bin/magick"
 
 # build image with dotnet sdk
 FROM mcr.microsoft.com/dotnet/sdk:7.0-bullseye-slim AS build
