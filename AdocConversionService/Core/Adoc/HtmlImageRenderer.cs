@@ -89,7 +89,11 @@ public sealed class HtmlImageRenderer
     private async ValueTask<(string TgtFilePath, string NodeAppPath)>
         CreateConversionFile(CancellationToken token)
     {
+        const string InjectionElement = "</head>";
+        
         var tgtFilePath = Path.Combine(_workDirPath, TgtFileName);
+        var styleInjection = PrepareRenderSizeInjectionStyle(InjectionElement);
+        
         var code = $$"""
         const fs = require('fs');
         const nodeHtmlToImage = require('node-html-to-image');
@@ -97,9 +101,10 @@ public sealed class HtmlImageRenderer
         fs.readFile('{{SourceFilePath}}', 'utf8', function(err, data) {
             if (err) throw err;
             console.log('OK');
+            const h = data.replace('{{InjectionElement}}'.'{{styleInjection}}');
             nodeHtmlToImage({
                 output: '{{tgtFilePath}}',
-                html: data,
+                html: h,
                 type: 'jpeg',
                 puppeteerArgs: 
                 {
@@ -114,5 +119,26 @@ public sealed class HtmlImageRenderer
         await File.WriteAllTextAsync(nodeAppPath, code, token);
 
         return (tgtFilePath, nodeAppPath);
+    }
+
+    private static string PrepareRenderSizeInjectionStyle(string elementToExtend)
+    {
+        var (width, height) = Const.RenderImageResolution;
+        var style = $$"""
+                <style>
+                    body {
+                        width: {{width}}px;
+                        height: {{height}}px;
+                    }
+                </style>
+                {{elementToExtend}}
+                """;
+        
+        style = style
+            .Replace(" ",string.Empty)
+            .Replace("\\r",string.Empty)
+            .Replace("\\n",string.Empty);
+        
+        return style;
     }
 }
