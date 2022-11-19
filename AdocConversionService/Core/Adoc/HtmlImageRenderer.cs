@@ -80,7 +80,7 @@ public sealed class HtmlImageRenderer
             || !int.TryParse(match.Groups[1].Value, out var width)
             || !int.TryParse(match.Groups[2].Value, out var height))
         {
-            return (false, 0, 0, "Failed to determine image size");
+            return (false, 0, 0, $"Failed to determine image size in output: {outStr}");
         }
 
         return (true, width, height, null);
