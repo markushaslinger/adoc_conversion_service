@@ -101,7 +101,7 @@ public sealed class HtmlImageRenderer
         fs.readFile('{{SourceFilePath}}', 'utf8', function(err, data) {
             if (err) throw err;
             console.log('OK');
-            const h = data.replace('{{InjectionElement}}'.'{{styleInjection}}');
+            const h = data.replace('{{InjectionElement}}','{{styleInjection}}');
             nodeHtmlToImage({
                 output: '{{tgtFilePath}}',
                 html: h,
