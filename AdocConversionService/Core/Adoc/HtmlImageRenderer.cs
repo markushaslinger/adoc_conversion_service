@@ -8,7 +8,7 @@ public sealed class HtmlImageRenderer
 {
     private const string TgtFileName = "image.jpeg";
     private const string NodeAppName = "app.js";
-    private static readonly Regex sizeParseRegex = new("^(\\d+)x(\\d+)$", RegexOptions.Compiled);
+    private static readonly Regex sizeParseRegex = new("^'(\\d+)x(\\d+)'$", RegexOptions.Compiled);
     private readonly string _sourceFile;
     private readonly string _workDirPath;
 
