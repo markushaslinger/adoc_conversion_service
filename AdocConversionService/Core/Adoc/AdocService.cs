@@ -33,10 +33,10 @@ public sealed class AdocService
             };
         }
 
+        // TODO remove
+        Console.WriteLine($"Adoc conversion took {sw.Elapsed}");
         if (conversionType is ConversionType.Html or ConversionType.Pdf)
         {
-            // TODO remove
-            Console.WriteLine($"Adoc conversion took {sw.Elapsed}");
             return new()
             {
                 Success = true,
