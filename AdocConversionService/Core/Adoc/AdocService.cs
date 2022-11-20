@@ -21,7 +21,7 @@ public sealed class AdocService
         var srcFilePath = await WriteSrcFile(adocContent);
         var (success, tgtFilePath, errorMsg)
             = await RunAdoc(cmd, args, srcFilePath, token);
-
+        
         if (!success || tgtFilePath == null)
         {
             return new()
@@ -35,6 +35,8 @@ public sealed class AdocService
 
         if (conversionType is ConversionType.Html or ConversionType.Pdf)
         {
+            // TODO remove
+            Console.WriteLine($"Adoc conversion took {sw.Elapsed}");
             return new()
             {
                 Success = true,
@@ -45,6 +47,8 @@ public sealed class AdocService
 
         var (renderSuccess, imageName, imageBytes, width, height, renderErrorMsg)
             = await RunImageCreation(tgtFilePath, token);
+        // TODO remove
+        Console.WriteLine($"Image creation took {sw.Elapsed}");
         return new()
         {
             Success = renderSuccess,

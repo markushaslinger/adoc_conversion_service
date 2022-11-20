@@ -28,8 +28,7 @@ public sealed class TempDir : IDisposable
     {
         if (Directory.Exists(DirPath))
         {
-            // TODO re-enable!
-            //Directory.Delete(DirPath, true);
+            Directory.Delete(DirPath, true);
         }
     }
 
