@@ -5,9 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddGrpcReflection();
 builder.Services.PerformServiceSetup();
 
 var app = builder.Build();
+
+// TODO remove for final deployment
+app.MapGrpcReflectionService();
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<ConvertService>();
